@@ -12,5 +12,6 @@ export function useNavigate() {
     router.push(ROUTES.AUTH.LOGIN);
   };
 
+
   return { toHome, toLogin };
 }

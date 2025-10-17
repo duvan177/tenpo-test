@@ -4,6 +4,7 @@ import API_ENDPOINTS from "@/services/auth";
 import { UseApiResult } from "@/types/axios";
 import { LoginParams } from "@/types/auth";
 import { useAuthStore } from "@/store/authStore";
+import { useNavigate } from "./useNavigate";
 
 type UseAuth = UseApiResult<{ user: LoginParams; token: string }> & {
   login: (params: LoginParams) => Promise<{
@@ -11,13 +12,17 @@ type UseAuth = UseApiResult<{ user: LoginParams; token: string }> & {
     error: string | null;
     status: number | null;
   }>;
+  logout: () => void;
 };
 
 export const useAuth = (): UseAuth => {
-  const [data, setData] = useState<{ user: LoginParams; token: string } | null>(null);
+  const { toLogin } = useNavigate();
+  const [data, setData] = useState<{ user: LoginParams; token: string } | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { setUser, setToken } = useAuthStore();
+  const { setUser, setToken, logout } = useAuthStore();
   const login = async ({ email, password }: LoginParams) => {
     try {
       setLoading(true);
@@ -44,9 +49,18 @@ export const useAuth = (): UseAuth => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    "//TODO Debo agregar aqui una validacion para que el usuario no pueda hacer login si ya esta autenticado";
-  }, []);
 
-  return { data, loading, error, login };
+  const logoutUser = async () => {
+    try {
+      await axios.post(API_ENDPOINTS.AUTH.LOGOUT);
+      setData(null);
+      logout();
+      toLogin();
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
+
+  return { data, loading, error, login, logout: logoutUser };
 };

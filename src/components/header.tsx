@@ -1,10 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useNavigate } from "@/hooks/useNavigate";
+import { useAuth } from "@/hooks/useAuth";
+import { useAuthStore } from "@/store/authStore";
 
 export function Header() {
-  const { toLogin } = useNavigate();
+  const { logout } = useAuth();
+  const { user } = useAuthStore();
+
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,9 +18,9 @@ export function Header() {
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span className="text-gray-600">User Name</span>
+            <span className="text-gray-600">{user?.email?.split("@")[0]}</span>
             <Button
-              onClick={toLogin}
+              onClick={logout}
               className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
             >
               Logout
