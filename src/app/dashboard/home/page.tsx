@@ -1,5 +1,5 @@
 "use client";
-import CardList from "@/components/cardList";
+import CardList from "@/components/cardVirtualList";
 import { Spinner } from "@/components/ui/spinner";
 import { useProducts } from "@/hooks/useProducts";
 import React from "react";
