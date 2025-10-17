@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["cdn.dummyjson.com"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/auth/login",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
