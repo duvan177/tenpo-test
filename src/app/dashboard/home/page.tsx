@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
           <p className="mt-2 text-gray-600">Welcome to your dashboard</p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-1  gap-6 w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-1  gap-6 md:w-1xl mx-auto sm:w-1xl ">
           {data?.map((item) => (
             <Card key={item.id} item={item} />
           ))}
