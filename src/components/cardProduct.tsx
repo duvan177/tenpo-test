@@ -8,8 +8,8 @@ export const CardProduct: React.FC<{
   ref?: React.Ref<HTMLDivElement>;
 }> = ({ item, style, ref }) => (
   <div className="p-3 md:p-8" style={style} ref={ref}>
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between p-3 md:p-6 gap-3">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow w-full">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between p-3 md:p-6 gap-3 ">
         <div className="flex items-start gap-3 md:gap-4 flex-1">
           <Image
             src={item.thumbnail}
