@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Spinner } from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Controller, Form, useForm } from "react-hook-form";
@@ -16,6 +17,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "@/hooks/useAuth";
 import { LoginParams } from "@/types/auth";
 import { useNavigate } from "@/hooks/useNavigate";
+import { Terminal, AlertCircleIcon } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -23,7 +26,7 @@ const schema = yup.object().shape({
 });
 
 export default function LoginPage() {
-  const { login, loading } = useAuth();
+  const { login, loading, error } = useAuth();
   const { toHome } = useNavigate();
   const {
     handleSubmit,
@@ -34,7 +37,7 @@ export default function LoginPage() {
   });
   const onSubmit = async (data: LoginParams) => {
     const response = await login(data);
-    if (response.status !== 200) alert(`Login failed: ${response.error}`);
+    if (response.status !== 200) return;
     toHome();
   };
   return (
@@ -90,10 +93,17 @@ export default function LoginPage() {
                 )}
               </div>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex flex-col gap-4">
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing In..." : "Sign In"}
+                {loading ? <Spinner /> : "Sign In"}
               </Button>
+              <Alert hidden={!error} variant="destructive">
+                <AlertCircleIcon />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                  the credentials are incorrect, please try again.
+                </AlertDescription>
+              </Alert>
             </CardFooter>
           </Card>
         </form>
