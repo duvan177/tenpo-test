@@ -40,7 +40,7 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
 
   const primerItem = Math.floor(scrollTop / ITEM_HEIGHT);
   const itemsInViewport = Math.ceil(containerHeight / ITEM_HEIGHT);
-  const buffer = 10;
+  const buffer = 3;
 
   const startIndex = Math.max(0, primerItem - buffer);
   const endIndex = Math.min(totalItems, primerItem + itemsInViewport + buffer);
@@ -60,12 +60,15 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="grid grid-cols-1 md:grid-cols-1  gap-6 md:w-1xl mx-auto sm:w-1xl  p-4"
+        className="grid grid-cols-1 md:grid-cols-1  md: gap-6 md:w-1xl mx-auto sm:w-1xl  md:p-4"
         style={{
-          height: "70vh",
+          height: "80vh",
           overflowY: "auto",
           background: "#fff",
           position: "relative",
+          scrollbarWidth: "none", 
+          msOverflowStyle: "none", 
+          WebkitOverflowScrolling: "touch", 
         }}
       >
         <div
@@ -100,7 +103,6 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
           })}
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
     </>
   );
 };

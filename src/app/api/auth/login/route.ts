@@ -10,7 +10,10 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
+    if(!(email === 'test@example.com' && password === 'password')) return NextResponse.json(
+      { error: "Credenciales inválidas" },
+      { status: 401 }
+    );
     const fakeToken = `fake-jwt-token-${Date.now()}-${Math.random()
       .toString(36)
       .substring(7)}`;

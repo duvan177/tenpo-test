@@ -26,15 +26,10 @@ export const CardProduct: React.FC<{
             <p className="text-xs sm:text-sm md:text-sm text-gray-600 line-clamp-2 mb-2">
               {item.description}
             </p>
-
-            <span className="inline-block md:hidden px-2 py-0.5 bg-blue-100 text-blue-800 text-[10px] rounded-full">
+            <span className="hidden md:inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full whitespace-nowrap flex-shrink-0">
               {item.category}
             </span>
           </div>
-
-          <span className="hidden md:inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full whitespace-nowrap flex-shrink-0">
-            {item.category}
-          </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:mt-2">
@@ -42,10 +37,13 @@ export const CardProduct: React.FC<{
             ${item.price}
           </span>
           <span className="px-2 py-1 bg-blue-100 text-blue-800 text-[10px] sm:text-xs rounded-full">
-            ⭐ {item.rating}
+            {item.rating}
           </span>
           <span className="px-2 py-1 bg-red-100 text-red-800 text-[10px] sm:text-xs rounded-full">
-            📦 {item.stock}
+            {item.stock}
+          </span>
+          <span className="xs:inline-block sm:hidden px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full whitespace-nowrap flex-shrink-0">
+            {item.category}
           </span>
         </div>
       </div>

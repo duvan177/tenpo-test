@@ -12,11 +12,15 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen w-full bg-white rounded-md sm:py-8">
+      <div className="md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Home</h1>
-          <p className="mt-2 text-gray-600">Welcome to your dashboard</p>
+          <h1 className="md:text-3xl sm:text-4xl font-bold text-gray-900">
+            Dashboard Home
+          </h1>
+          <p className="mt-2 text-gray-600 sm:text-lg">
+            Welcome to your dashboard
+          </p>
         </header>
 
         <CardList items={data} />
